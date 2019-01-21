@@ -21,7 +21,8 @@ class StrategyDefenseur(Strategy):
 
     def compute_strategy(self, state, id_team, id_player):
         centre_panier = Vector2D((id_team - 1) * GAME_WIDTH, GAME_HEIGHT/2)
-        pos_cible = (state.ball.position + centre_panier) / 2
+        pos_cible_y = GAME_HEIGHT/2+((GAME_HEIGHT/2-state.ball.position.y)/2)
+        pos_cible = Vector2D((centre_panier.x + state.ball.position.x) / 2, pos_cible_y)
         # id_team is 1 or 2
         # id_player starts at 0
         return SoccerAction(pos_cible, Vector2D(0,0))
