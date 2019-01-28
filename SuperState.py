@@ -42,4 +42,27 @@ class SuperState(SoccerState):
     def dir_ball(self):
        return (self.state.ball.position - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
    
+    @property
+    def dir_point(self, vec):
+        return self.state.position - vec
+    
+    def distance_balle(self, pointB, distance):
+        return (self.state.ball.position.distance(pointB) < distance)
+    
+    def det_team(nb):
+        if(nb == 1):
+            return 1
+        return 0
+
+    def joueur_proche(self, id_team, id_player):
+        proche = self.state.player_state(id_team, 0)
+        for i in range (self.state.nb_players(id_team)):
+            print(i)
+            if(self.state.player_state(id_team, i).position.distance(proche.position) < 2):
+                continue
+            if(self.state.player_state(id_team, i).position.distance(self.player)< proche.position.distance(self.player)):
+                proche = self.state.player_state(id_team, i)
+                print(id_player)
+        print(proche)
+        return proche
     
