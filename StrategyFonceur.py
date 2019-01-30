@@ -21,6 +21,8 @@ PLAYER_RADIUS = 1.
 BALL_RADIUS = 0.65
 CAN_SHOOT = PLAYER_RADIUS + BALL_RADIUS
 
+"""joueur qui vise ce que vise la balle"""
+
 class StrategyFonceur(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Fonceur")
@@ -32,7 +34,7 @@ class StrategyFonceur(Strategy):
         # id_team is 1 or 2
         # id_player starts at 0
         if(dir_balle.norm < CAN_SHOOT):
-            return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
+            return SoccerAction(s.dir_balle_vector, (s.goal_e - s.player).normalize().scale(3.8))
         return SoccerAction(dir_balle, Vector2D(0,0))
 
 

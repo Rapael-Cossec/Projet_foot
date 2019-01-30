@@ -27,10 +27,11 @@ class StrategyDefenseur(Strategy):
 
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
+        dir_balle = s.ball - s.player
 #        Distance_Shoot = (s.ball - s.player).norm 
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         if(s.distance_balle(s.player, CAN_SHOOT)):
-            return SoccerAction(pos_cible, (s.joueur_proche(id_team, id_player)) - s.player.position)
+            return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
         # id_team is 1 or 2
         # id_player starts at 0
         if(s.distance_balle(s.player, 20)):
@@ -72,9 +73,9 @@ team1 = SoccerTeam(name="Team 1")
 team2 = SoccerTeam(name="Team 2")
 
 # Add players
-team1.add("Random", RandomStrategy())  # Random strategy
-#team1.add("Defenseur", StrategyDefenseur())   # Static strategy
-team1.add("Defenseur", StrategyFonceur())  # Random strategy
+team2.add("Fonceur", StrategyFonceur())  # Random strategy
+team1.add("Defenseur", StrategyDefenseur())   # Static strategy
+team1.add("Fonceur", StrategyFonceur())  # Random strategy
 team2.add("Defenseur", StrategyDefenseur())   # Static strategy
 
 # Create a match
