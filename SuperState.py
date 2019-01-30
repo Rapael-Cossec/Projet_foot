@@ -55,14 +55,12 @@ class SuperState(SoccerState):
         return 0
 
     def joueur_proche(self, id_team, id_player):
-        proche = self.state.player_state(id_team, 0)
-        for i in range (self.state.nb_players(id_team)):
-            print(i)
-            if(self.state.player_state(id_team, i).position.distance(proche.position) < 2):
-                continue
-            if(self.state.player_state(id_team, i).position.distance(self.player)< proche.position.distance(self.player)):
-                proche = self.state.player_state(id_team, i)
-                print(id_player)
-        print(proche)
-        return proche
-    
+        joueur_actuelle = self.player(id_team, id_player).position
+        joueur_proche = self.goal_e
+        for i in range(self.nb_players):
+            if(i == id_player):
+                
+            elif(joueur_proche.position.distance(joueur_actuelle) < self.player(id_team, i).position.distance(joueur_actuelle)):
+                joueur_proche = self.player(id_team, i).position
+        return joueur_proche
+            
