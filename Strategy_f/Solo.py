@@ -20,10 +20,16 @@ from Strategy_f.tools import SuperState
 from soccersimulator import settings
 import math
 
+
+
 class StrategySolo(Strategy):
+    
+    
     def __init__(self):
         Strategy.__init__(self, "Solo")
-
+        self.counter = 0
+        
+    
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
@@ -31,12 +37,14 @@ class StrategySolo(Strategy):
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         
         
-        if s.joueur_proche_ball(id_team, id_player) == s.player:
+        if(self.counter > 3):
             if(dir_balle.norm < CAN_SHOOT):
                 return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
             return SoccerAction(dir_balle, Vector2D(0,0))
     
+    
         if(s.distance_balle(s.player, CAN_SHOOT)):
+            self.counter += 1
             if(s.state.nb_players(id_team) > 1):
                 return SoccerAction(s.dir_ball_succ, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
             return SoccerAction(dir_balle, Vector2D(0, 0, 90, 5))
@@ -46,3 +54,19 @@ class StrategySolo(Strategy):
         if(s.distance_balle(s.player, 10)):
             return SoccerAction(dir_balle, Vector2D(0., 0.))
         return SoccerAction(pos_cible, Vector2D(0,0))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+"""
+        if s.joueur_proche_ball(id_team, id_player) == s.player:
+            if(dir_balle.norm < CAN_SHOOT):
+                return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
+            return SoccerAction(dir_balle, Vector2D(0,0))
+"""
+    

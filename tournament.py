@@ -12,9 +12,9 @@ from soccersimulator import SoccerTeam
 def get_team(nb_players):  
     team = SoccerTeam(name="Unknown")
     if nb_players == 1:
-        team.add("Billy",StrategyDefenseur())
+        team.add("Billy",StrategySolo())
     if nb_players == 2:
-        team.add("Billy", StrategyDefenseur())
+        team.add("Billy", Strategy())
         team.add("Footix", StrategyAttaquant())
     return team
 

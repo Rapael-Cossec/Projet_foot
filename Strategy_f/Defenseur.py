@@ -33,7 +33,7 @@ class StrategyDefenseur(Strategy):
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         if(s.distance_balle(s.player, CAN_SHOOT)):
             if(s.state.nb_players(id_team) > 1):
-                return SoccerAction(s.dir_ball_succ, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
+                return SoccerAction(s.dir_ball, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
             return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
         # id_team is 1 or 2
         # id_player starts at 0
