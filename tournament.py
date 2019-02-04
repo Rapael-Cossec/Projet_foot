@@ -6,12 +6,10 @@ Created on Mon Feb  4 16:51:52 2019
 @author: 3700049
 """
 
-from Strategy_f.tools import SuperState
-from Strategy_f.Attaquant import StrategyAttaquant
-from Strategy_f.Defenseur import StrategyDefenseur
+from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur
 from soccersimulator import SoccerTeam
 
-def get_team(nb_players): 
+def get_team(nb_players):  
     team = SoccerTeam(name="Unknown")
     if nb_players == 1:
         team.add("Billy",StrategyDefenseur())

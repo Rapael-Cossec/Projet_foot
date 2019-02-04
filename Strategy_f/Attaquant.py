@@ -29,7 +29,7 @@ class StrategyAttaquant(Strategy):
         if(s.dir_ball.norm < CAN_SHOOT):
             return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)))
         
-        return SoccerAction(s.dir_ball, Vector2D(0,0))
+        return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
 """  
 # Create teams
 team1 = SoccerTeam(name="Team 1")
