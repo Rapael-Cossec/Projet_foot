@@ -67,14 +67,27 @@ class StrategyFonceur(Strategy):
         return SoccerAction(dir_balle, Vector2D(0,0))
 
 
+
+class RandomStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self, "Random")
+
+    def compute_strategy(self, state, id_team, id_player):
+        # id_team is 1 or 2
+        # id_player starts at 0
+        return SoccerAction(Vector2D.create_random(-1, 1),
+                            Vector2D.create_random(-1, 1))
+        
+
+
         
 # Create teams
 team1 = SoccerTeam(name="Team 1")
 team2 = SoccerTeam(name="Team 2")
 
 # Add players
-team2.add("Fonceur", StrategyFonceur())  # Random strategy
-team1.add("Defenseur", StrategyDefenseur())   # Static strategy
+team1.add("Fonceur", StrategyFonceur())  # Random strategy
+team2.add("Defenseur", StrategyFonceur())   # Static strategy
 team1.add("Fonceur", StrategyFonceur())  # Random strategy
 team2.add("Defenseur", StrategyDefenseur())   # Static strategy
 

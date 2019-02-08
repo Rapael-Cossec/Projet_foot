@@ -49,6 +49,11 @@ class SuperState(SoccerState):
     def distance_balle(self, pointB, distance):
         return (self.state.ball.position.distance(pointB) < distance)
     
+    def bait(self):
+        if(self.id_team==1):
+            return Vector2D(self.player.x, GAME_HEIGHT)
+        return Vector2D(self.player.x, 0)
+    
     def det_team(nb):
         if(nb == 1):
             return 1
@@ -59,7 +64,7 @@ class SuperState(SoccerState):
         dir_balle = self.state.ball.position - self.state.player_state(self.id_team, self.id_player).position
         return (dir_balle.dot(self.ball.next)).normalize.scale(5)
     
-"""S
+    
     def joueur_proche(self, id_team, id_player):
         joueur_actuelle = self.player(id_team, id_player).position
         joueur_proche = self.goal_e
@@ -69,4 +74,4 @@ class SuperState(SoccerState):
             elif(joueur_proche.position.distance(joueur_actuelle) > self.player(id_team, i).position.distance(joueur_actuelle)):
                 joueur_proche = self.player(id_team, i).position
         return joueur_proche
-            """
+    
