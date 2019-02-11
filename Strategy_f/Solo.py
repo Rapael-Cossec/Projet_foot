@@ -51,12 +51,9 @@ class StrategySolo(Strategy):
     
     
         if(s.distance_balle(s.player, CAN_SHOOT)):
-            if(s.state.player.position.distance(Vector2D(s.player.position.x, s.joueur_proche(id_team, id_player).y)) < s.joueur_proche(id_team, id_player).distance(Vector2D(s.player.position.y, s.joueur_proche(id_team, id_player).x))):
-                soccer = 1
-                
-                if(s.dir_ball.norm < CAN_SHOOT):
-                    return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)))
-                return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
+            if(s.dir_ball.norm < CAN_SHOOT):
+                return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)))
+            return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
             
             
             if(s.state.nb_players(id_team) > 1):
