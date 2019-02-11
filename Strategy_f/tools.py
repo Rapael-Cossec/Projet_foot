@@ -34,6 +34,10 @@ class SuperState(SoccerState):
         return self.state.ball.position
     
     @property
+    def ball_vitesse(self):
+        return self.state.ball.vitesse
+    
+    @property
     def player(self):
         return self.state.player_state(self.id_team, self.id_player).position
     @property
