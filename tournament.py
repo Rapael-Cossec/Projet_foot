@@ -5,6 +5,9 @@ Created on Mon Feb  4 16:51:52 2019
 
 @author: 3700049
 """
+from .Projet_foot_autre.socceria.strategies import defenseur2 , gobetter,attaquant2
+from soccersimulator import SoccerTeam
+from socceria.tools import SimpleStrategy,SuperState
 
 from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur
 from soccersimulator import SoccerTeam
