@@ -63,6 +63,12 @@ class SuperState(SoccerState):
         """direction vers balle + acceleration de balle"""
         return ((self.state.ball.vitesse + self.state.ball.position) * 5 - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
     
+    @property
+    def bait(self):
+        if (self.id_team==1):
+            return Vector2D(self.player.x, GAME_HEIGHT)
+        return Vector2D(self.player.x, 0)
+            
     
     def joueur_proche(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_player != self.id_player]

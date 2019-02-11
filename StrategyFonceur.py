@@ -31,8 +31,8 @@ class StrategyFonceur(Strategy):
         #dir_balle = state.ball.position - state.player_state(id_team, id_player).position
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
-        # id_team is 1 or 2
-        # id_player starts at 0
+#         id_team is 1 or 2
+#         id_player starts at 0
         if(dir_balle.norm < CAN_SHOOT):
             return SoccerAction(s.dir_balle_vector, (s.goal_e - s.player).normalize().scale(3.8))
         return SoccerAction(dir_balle, Vector2D(0,0))

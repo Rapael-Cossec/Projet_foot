@@ -41,9 +41,8 @@ class StrategyDefenseur(Strategy):
         if(s.distance_balle(s.player, 10)):
             return SoccerAction(dir_balle, Vector2D(0., 0.))
         return SoccerAction(pos_cible, Vector2D(0,0))
-
-
 """
+
 class RandomStrategy(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Random")

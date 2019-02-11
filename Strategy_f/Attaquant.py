@@ -14,7 +14,7 @@ CAN_SHOOT = PLAYER_RADIUS + BALL_RADIUS
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
 from soccersimulator import Strategy
-from Strategy_f.tools import SuperState
+from .tools import SuperState
 from soccersimulator import settings
 import math
 

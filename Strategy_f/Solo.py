@@ -27,7 +27,7 @@ class StrategySolo(Strategy):
     
     def __init__(self):
         Strategy.__init__(self, "Solo")
-        self.counter = 0
+        soccer = 0
         
     
     def compute_strategy(self, state, id_team, id_player):
@@ -51,10 +51,17 @@ class StrategySolo(Strategy):
     
     
         if(s.distance_balle(s.player, CAN_SHOOT)):
-            self.counter += 1
+            if(s.state.player.position.distance(Vector2D(s.player.position.x, s.joueur_proche(id_team, id_player).y)) < s.joueur_proche(id_team, id_player).distance(Vector2D(s.player.position.y, s.joueur_proche(id_team, id_player).x))):
+                soccer = 1
+                
+                if(s.dir_ball.norm < CAN_SHOOT):
+                    return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)))
+                return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
+            
+            
             if(s.state.nb_players(id_team) > 1):
                 return SoccerAction(s.dir_ball_succ, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
-            return SoccerAction(dir_balle, Vector2D(s.player.x, GAME_HEIGHT))
+            return SoccerAction(dir_balle, Vector2D(s.player.x, GAME_HEIGHT).normalize().scale(5))
         # id_team is 1 or 2
         # id_player starts at 0
         
