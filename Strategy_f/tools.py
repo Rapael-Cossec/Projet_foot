@@ -21,9 +21,13 @@ class SuperState(SoccerState):
         self.state = state
         self.id_team = id_team
         self.id_player = id_player
+        self.counter = 0
     
     def __getattr__(self, attr):
         return getattr(self.state, attr)
+    
+    def add_counter(self):
+        self.counter = self.counter + 1
     
     @property
     def ball(self):
@@ -60,7 +64,7 @@ class SuperState(SoccerState):
             return 1
         return 0
     
-    def det_team_e(nb):
+    def det_team_e(self, nb):
         if(nb == 1):
             return 2
         return 1
@@ -85,7 +89,7 @@ class SuperState(SoccerState):
         return min([(self.ball.distance(player.position), player) for player in opponents])[1]
     
     def joueur_e(self, id_team, id_player):
-        return self.players_state(self.det_team_e(id_team, id_player))
+        return self.state.player_state(self.det_team_e(id_team), self.id_player).position
     
     def joueur_solo_attaque(self, id_team):
         if(self.player.distance(Vector2D(self.player.x, self.joueur_e(self.det_team_e(id_team), 0).position.y)) < self.joueur_e(self.det_team_e(id_team), 0).distance(Vector2D(self.player.x, self.joueur_e(self.det_team_e(id_team), 0)).position.y)):

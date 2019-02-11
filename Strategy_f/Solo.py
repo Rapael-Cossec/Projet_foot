@@ -27,8 +27,8 @@ class StrategySolo(Strategy):
     
     def __init__(self):
         Strategy.__init__(self, "Solo")
-        soccer = 0
-        
+        self.counter = 0
+        self.counter2 = 0
     
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
@@ -36,15 +36,27 @@ class StrategySolo(Strategy):
 #        Distance_Shoot = (s.ball - s.player).norm 
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         
-        if(self.update_round):
+        """
+        if(s.joueur_solo_attaque(id_team)==1):
+            if(dir_balle.norm < CAN_SHOOT):
+                return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
+            return SoccerAction(dir_balle, Vector2D(0, 0))
+        """
+        if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
-            
-#        if(s.joueur_solo_attaque(id_team)==1):
-#            if(dir_balle.norm < CAN_SHOOT):
-#                return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
-#            return SoccerAction(dir_balle, Vector2D(0, 0))
+            self.counter2 = 0
         
-        if(self.counter > 3):
+        if(s.player.distance(s.ball) < s.joueur_e(id_team, id_player).distance(s.ball) and self.counter > 3):
+            if(self.counter2 == 0):
+                if(dir_balle.norm < CAN_SHOOT):
+                    self.counter2 +=1
+                    return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
+                if(s.distance_balle(s.player, 10)):
+                    return SoccerAction(dir_balle, Vector2D(0., 0.))
+                return SoccerAction(pos_cible, Vector2D(0,0))
+                
+                
+                
             if(dir_balle.norm < CAN_SHOOT):
                 return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
             return SoccerAction(dir_balle, Vector2D(0, 0))
@@ -52,7 +64,11 @@ class StrategySolo(Strategy):
     
         if(s.distance_balle(s.player, CAN_SHOOT)):
             if(s.dir_ball.norm < CAN_SHOOT):
-                return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)))
+                self.counter += 1
+                if(s.joueur_e(id_team, id_player).y > GAME_HEIGHT/2):
+                    return SoccerAction(s.dir_ball_acc, Vector2D(0, -GAME_HEIGHT).normalize().scale(3.4))
+                else:
+                    return SoccerAction(s.dir_ball_acc, Vector2D(0, GAME_HEIGHT).normalize().scale(3.4))
             return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
             
             
