@@ -36,18 +36,25 @@ class StrategySolo(Strategy):
 #        Distance_Shoot = (s.ball - s.player).norm 
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         
+        if(self.update_round):
+            self.counter = 0
+            
+#        if(s.joueur_solo_attaque(id_team)==1):
+#            if(dir_balle.norm < CAN_SHOOT):
+#                return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
+#            return SoccerAction(dir_balle, Vector2D(0, 0))
         
         if(self.counter > 3):
             if(dir_balle.norm < CAN_SHOOT):
                 return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
-            return SoccerAction(dir_balle, Vector2D(0,0))
+            return SoccerAction(dir_balle, Vector2D(0, 0))
     
     
         if(s.distance_balle(s.player, CAN_SHOOT)):
             self.counter += 1
             if(s.state.nb_players(id_team) > 1):
                 return SoccerAction(s.dir_ball_succ, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
-            return SoccerAction(dir_balle, Vector2D(0, 0, 90, 5))
+            return SoccerAction(dir_balle, Vector2D(s.player.x, GAME_HEIGHT))
         # id_team is 1 or 2
         # id_player starts at 0
         
