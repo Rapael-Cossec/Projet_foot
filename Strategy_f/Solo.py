@@ -31,6 +31,12 @@ class StrategySolo(Strategy):
         self.counter2 = 0
         self.counterstep = 0
     def compute_strategy(self, state, id_team, id_player):
+        if(state.step==0):
+            self.counterstep = 0
+            self.counter = 0
+            self.counter2 = 0
+            
+            
         self.counterstep += 1
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
@@ -53,7 +59,7 @@ class StrategySolo(Strategy):
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter2 = 0
-
+            
             
         if(s.player.distance(s.ball) < s.joueur_e(id_team, id_player).distance(s.ball) and self.counter > 2):
             if(self.counter2 == 0):

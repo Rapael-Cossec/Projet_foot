@@ -66,7 +66,7 @@ class SuperState(SoccerState):
     def det_team(nb):
         if(nb == 1):
             return 1
-        return 0
+        return -1
     
     def det_team_e(self, nb):
         if(nb == 1):

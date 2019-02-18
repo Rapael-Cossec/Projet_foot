@@ -13,6 +13,7 @@ from .Fonceur import StrategyFonceur
 from .Solo import StrategySolo
 from .tools import SuperState
 from .Defenseur_centrale import StrategyDefenseur_duo
+from .Attaquant_centrale import StrategyAttaquant_duo
 
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
 from soccersimulator import SoccerTeam
@@ -22,10 +23,10 @@ def get_team(nb_players):
     if nb_players == 1:
         team.add("StrikeBack",StrategySolo())
     if nb_players == 2:
-        team.add("Footix", RandomStrategy())
+        team.add("Footix", StrategyAttaquant_duo())
         team.add("Billy", StrategyDefenseur_duo())
     if nb_players == 3:
+#        team.add("Footix", StrategyAttaquant())
         team.add("Footix", StrategyAttaquant())
-        team.add("Footix", StrategyAttaquant())
-#        team.add("Billy", StrategyDefenseur_duo())
+        team.add("Billy", StrategyAttaquant_duo())
     return team
