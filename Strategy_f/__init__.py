@@ -28,5 +28,5 @@ def get_team(nb_players):
     if nb_players == 3:
 #        team.add("Footix", StrategyAttaquant())
         team.add("Footix", StrategyAttaquant())
-        team.add("Billy", StrategyAttaquant_duo())
+        #team.add("Billy", StrategyAttaquant_duo())
     return team

@@ -9,7 +9,7 @@ Created on Mon Feb  4 16:51:52 2019
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
 #from soccersimulator import SoccerTeam
 #
-#def get_team(nb_players):  
+#def get_team(nb_players):  +++++
 #    team = SoccerTeam(name="Unknown")
 #    if nb_players == 1:
 #        team.add("StrikeBack",StrategySolo())
@@ -26,7 +26,7 @@ Created on Mon Feb  4 16:51:52 2019
 from soccersimulator import Simulation, show_simu
 from Strategy_f import get_team
 
-team1 = get_team(1)
+team1 = get_team(3)
 team2 = get_team(1)
 simu = Simulation (team1,team2)
 show_simu(simu)

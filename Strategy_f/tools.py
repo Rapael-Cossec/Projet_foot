@@ -63,8 +63,8 @@ class SuperState(SoccerState):
     def distance_balle(self, pointB, distance):
         return (self.state.ball.position.distance(pointB) < distance)
     
-    def det_team(nb):
-        if(nb == 1):
+    def det_team(self, nb):
+        if(nb == 0):
             return 1
         return -1
     
@@ -88,8 +88,12 @@ class SuperState(SoccerState):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_team == self.id_team and id_player != self.id_player]
         return min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]
     
-    def joueur_proche_ball(self, id_team, id_player):
+    def joueur_proche_ball_all(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players]
+        return min([(self.ball.distance(player_e.position), player_e) for player_e in opponents])[1]
+    
+    def joueur_proche_ball_a(self, id_team, id_player):
+        opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_team == self.id_team and id_player != self.id_player]
         return min([(self.ball.distance(player_e.position), player_e) for player_e in opponents])[1]
     
     def joueur_e(self, id_team, id_player):
