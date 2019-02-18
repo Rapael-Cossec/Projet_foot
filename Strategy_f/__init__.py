@@ -23,8 +23,8 @@ def get_team(nb_players):
     if nb_players == 1:
         team.add("StrikeBack",StrategySolo())
     if nb_players == 2:
-        team.add("Footix", StrategyAttaquant_duo())
-        team.add("Billy", StrategyDefenseur_duo())
+        team.add("J'attaque", StrategyAttaquant_duo())
+        team.add("Je defend", StrategyDefenseur_duo())
     if nb_players == 3:
 #        team.add("Footix", StrategyAttaquant())
         team.add("Footix", StrategyAttaquant())

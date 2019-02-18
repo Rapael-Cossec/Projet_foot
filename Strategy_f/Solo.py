@@ -36,19 +36,12 @@ class StrategySolo(Strategy):
             self.counter = 0
             self.counter2 = 0
             
-            
         self.counterstep += 1
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
 #        Distance_Shoot = (s.ball - s.player).norm 
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         
-        """
-        if(s.joueur_solo_attaque(id_team)==1):
-            if(dir_balle.norm < CAN_SHOOT):
-                return SoccerAction(s.dir_ball, (s.goal_e - s.player).normalize().scale(3.8))
-            return SoccerAction(dir_balle, Vector2D(0, 0))
-        """    
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter2 = 0
@@ -65,30 +58,26 @@ class StrategySolo(Strategy):
             return SoccerAction(dir_balle, Vector2D(0, 0))
         
         
-        if(id_team==0):
+        if(id_team==1):
             if((s.ball - s.player).norm + (s.ball - s.goal_e).norm < (s.ball - s.joueur_e(id_team, id_player)).norm + (s.ball - s.goal_e).norm and (s.player.x > s.joueur_e(id_team, id_player).x)):
                 if(dir_balle.norm < CAN_SHOOT):
                     self.counterstep = 0
-                    self.counter2 =1
+                    self.counter2 = 1
                     return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
                 if(s.distance_balle(s.player, 10)):
                     return SoccerAction(dir_balle, Vector2D(0., 0.))
                 return SoccerAction(pos_cible, Vector2D(0,0))
-       else:
+            
+        if(id_team==2):
            if((s.ball - s.player).norm + (s.ball - s.goal_e).norm < (s.ball - s.joueur_e(id_team, id_player)).norm + (s.ball - s.goal_e).norm and (s.player.x < s.joueur_e(id_team, id_player).x)):
-                if(dir_balle.norm < CAN_SHOOT):
-                    self.counterstep = 0
-                    self.counter2 =1
-                    return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
-                if(s.distance_balle(s.player, 10)):
-                    return SoccerAction(dir_balle, Vector2D(0., 0.))
-                return SoccerAction(pos_cible, Vector2D(0,0))
-                
-            if(dir_balle.norm < CAN_SHOOT):
-                self.counterstep = 0
-                return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
-            return SoccerAction(dir_balle, Vector2D(0, 0))
-    
+               if(dir_balle.norm < CAN_SHOOT):
+                   self.counterstep = 0
+                   self.counter2 = 1
+                   return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
+               if(s.distance_balle(s.player, 10)):
+                   return SoccerAction(dir_balle, Vector2D(0., 0.))
+               return SoccerAction(pos_cible, Vector2D(0,0))
+           
     
         if(s.distance_balle(s.player, CAN_SHOOT)):
             if(s.dir_ball.norm < CAN_SHOOT):
@@ -99,10 +88,6 @@ class StrategySolo(Strategy):
                 return SoccerAction(dir_balle, Vector2D(0, GAME_HEIGHT).normalize().scale(2.5))
             return SoccerAction(dir_balle, Vector2D(0,0))
             
-            
-            if(s.state.nb_players(id_team) > 1):
-                return SoccerAction(dir_balle, (s.joueur_proche_a(id_team, id_player) - s.player).normalize().scale(3))
-            return SoccerAction(dir_balle, Vector2D(s.player.x, GAME_HEIGHT).normalize().scale(5))
         # id_team is 1 or 2
         # id_player starts at 0
         

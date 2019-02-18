@@ -17,9 +17,9 @@ Created on Mon Feb  4 16:51:52 2019
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyDefenseur_duo())
 #    if nb_players == 3:
+#        team.add("Footix", StrategyAttaquant())----
 #        team.add("Footix", StrategyAttaquant())
-#        team.add("Footix", StrategyAttaquant())
-##        team.add("Billy", StrategyDefenseur_duo())
+#        team.add("Billy", StrategyDefenseur_duo())
 #    return team
 
 #if __name__ =='__main__':
