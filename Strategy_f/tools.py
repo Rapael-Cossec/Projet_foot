@@ -82,15 +82,15 @@ class SuperState(SoccerState):
     
     def joueur_proche(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_player != self.id_player]
-        return min([(self.player.distance(player.position), player) for player in opponents])[1]
+        return min([(self.player.distance(player_p.position), player_p) for player_p in opponents])[1]
 
     def joueur_proche_a(self, id_team, id_player):
-        opponents = [self.state.player_state(id_team, id_player).position for (id_team, id_player) in self.state.players if id_team == self.id_team and id_player != self.id_player]
-        return min([(self.player.distance(player.position), player) for player in opponents])[1]
+        opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_team == self.id_team and id_player != self.id_player]
+        return min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]
     
     def joueur_proche_ball(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players]
-        return min([(self.ball.distance(player.position), player) for player in opponents])[1]
+        return min([(self.ball.distance(player_e.position), player_e) for player_e in opponents])[1]
     
     def joueur_e(self, id_team, id_player):
         return self.state.player_state(self.det_team_e(id_team), self.id_player).position
