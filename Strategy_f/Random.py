@@ -18,7 +18,7 @@ class RandomStrategy(Strategy):
 
         
         
-        
+"""     
         
 # Create teams
 team1 = SoccerTeam(name="Team 1")
@@ -35,3 +35,4 @@ simu = Simulation(team1, team2)
 show_simu(simu)
 
 
+"""
