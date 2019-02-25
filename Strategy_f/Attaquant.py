@@ -19,17 +19,18 @@ from soccersimulator import settings
 import math
 
 class StrategyAttaquant(Strategy):
-    def __init__(self):
+    def __init__(self): 
         Strategy.__init__(self, "Attaquant")
-
+#        self.strength = strength
+#        self.vitesse = vitesse
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
         # id_team is 1 or 2
         # id_player starts at 0
         if(s.dir_ball.norm < CAN_SHOOT):
-            return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)).normalize().scale(5))
+            return SoccerAction(s.dir_ball_acc.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
         
-        return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
+        return SoccerAction(s.dir_ball_acc.normalize().scale(5.0), Vector2D(0,0))
 """  
 # Create teams
 team1 = SoccerTeam(name="Team 1")
@@ -47,3 +48,4 @@ simu = Simulation(team1, team2)
 # Simulate and display the match
 show_simu(simu)"""
 
+''', strength=None, vitesse=None'''

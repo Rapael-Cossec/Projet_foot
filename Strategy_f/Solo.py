@@ -28,14 +28,14 @@ class StrategySolo(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Solo")
         self.counter = 0
-        self.counter2 = 0
         self.counterstep = 0
+        self.counter_engage = 0
     def compute_strategy(self, state, id_team, id_player):
         if(state.step==0):
             self.counterstep = 0
             self.counter = 0
-            self.counter2 = 0
-            
+        self.counter=0    #retirer pour la contre attaque
+        
         self.counterstep += 1
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
@@ -44,11 +44,26 @@ class StrategySolo(Strategy):
         
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
-            self.counter2 = 0
+            self.counter_engage = 0
+        
+        
+        
+#       if(self.counter_engage == 0 and self.counterstep<1):
+#            return SoccerAction(Vector2D(0,0), Vector2D(0,0))
+#        
+#        if(self.counter_engage == 0):
+#            if(s.dir_ball.norm < CAN_SHOOT):
+#                self.counter_engage = 1
+#                return SoccerAction(dir_balle, s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+#            return SoccerAction(dir_balle, Vector2D(0,0))
             
-        if(self.counter2 == 1):
+        if(dir_balle.norm < CAN_SHOOT):
+            return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
+        return SoccerAction(dir_balle, Vector2D(0, 0))
+        
+        if(self.counter == 1):
             if(dir_balle.norm < CAN_SHOOT):
-                return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(5.0))
+                return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
             return SoccerAction(dir_balle, Vector2D(0, 0))
         
         
@@ -62,7 +77,7 @@ class StrategySolo(Strategy):
             if((s.ball - s.player).norm + (s.ball - s.goal_e).norm < (s.ball - s.joueur_e(id_team, id_player)).norm + (s.ball - s.goal_e).norm and (s.player.x > s.joueur_e(id_team, id_player).x)):
                 if(dir_balle.norm < CAN_SHOOT):
                     self.counterstep = 0
-                    self.counter2 = 1
+                    self.counter = 1
                     return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
                 if(s.distance_balle(s.player, 10)):
                     return SoccerAction(dir_balle, Vector2D(0., 0.))
@@ -71,8 +86,9 @@ class StrategySolo(Strategy):
         if(id_team==2):
            if((s.ball - s.player).norm + (s.ball - s.goal_e).norm < (s.ball - s.joueur_e(id_team, id_player)).norm + (s.ball - s.goal_e).norm and (s.player.x < s.joueur_e(id_team, id_player).x)):
                if(dir_balle.norm < CAN_SHOOT):
+                   """, strength=None, vitesse=None"""
                    self.counterstep = 0
-                   self.counter2 = 1
+                   self.counter = 1
                    return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
                if(s.distance_balle(s.player, 10)):
                    return SoccerAction(dir_balle, Vector2D(0., 0.))
@@ -82,9 +98,16 @@ class StrategySolo(Strategy):
         if(s.distance_balle(s.player, CAN_SHOOT)):
             if(s.dir_ball.norm < CAN_SHOOT):
                 self.counterstep = 0
-                self.counter += 1
+                if(s.player.x < GAME_WIDTH*0.5 and s.player.y < GAME_HEIGHT*0.5): #en bas à gauche
+                    return SoccerAction(dir_balle,(Vector2D(0,0)-s.player).normalize().scale(3.8))
+                if(s.player.x < GAME_WIDTH*0.5 and s.player.y > GAME_HEIGHT*0.5): #en haut à gauche
+                    return SoccerAction(dir_balle,(Vector2D(0,GAME_HEIGHT)-s.player).normalize().scale(3.8))
+                if(s.player.x > GAME_WIDTH*0.5 and s.player.y > GAME_HEIGHT*0.5): #en haut à droite
+                    return SoccerAction(dir_balle,(Vector2D(GAME_WIDTH,GAME_HEIGHT)-s.player).normalize().scale(3.8))
+                if(s.player.x > GAME_WIDTH*0.5 and s.player.y < GAME_HEIGHT*0.5): #en bas à droite
+                    return SoccerAction(dir_balle,(Vector2D(GAME_WIDTH,0)-s.player).normalize().scale(3.8))
                 if(s.joueur_e(id_team, id_player).y > s.player.y):
-                    return SoccerAction(dir_balle, Vector2D(0, -GAME_HEIGHT).normalize().scale(2.5))
+                    return SoccerAction(dir_balle, (Vector2D(0, -GAME_HEIGHT).normalize().scale(3.8)))
                 return SoccerAction(dir_balle, Vector2D(0, GAME_HEIGHT).normalize().scale(2.5))
             return SoccerAction(dir_balle, Vector2D(0,0))
             

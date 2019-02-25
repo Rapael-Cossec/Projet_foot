@@ -11,7 +11,7 @@ from .Defenseur import StrategyDefenseur
 from .Attaquant import StrategyAttaquant
 from .Fonceur import StrategyFonceur
 from .Solo import StrategySolo
-from .tools import SuperState
+from .tools import SuperState, GoTestStrategy
 from .Defenseur_centrale import StrategyDefenseur_duo
 from .Attaquant_centrale import StrategyAttaquant_duo
 
@@ -26,7 +26,7 @@ def get_team(nb_players):
         team.add("J'attaque", StrategyAttaquant_duo())
         team.add("Je defend", StrategyDefenseur_duo())
     if nb_players == 3:
-#        team.add("Footix", StrategyAttaquant())
         team.add("Footix", StrategyAttaquant())
-        #team.add("Billy", StrategyAttaquant_duo())
+#        team.add("Footix", RandomStrategy())
+#        team.add("Billy", StrategyAttaquant_duo())
     return team

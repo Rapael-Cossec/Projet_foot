@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 25 19:39:05 2019
+
+@author: 3700049
+"""
+optimal listerep est une liste de 2 liste et il faudra tester les parametre'strength' sur la liste listerep[0] (ou listerep[1])
+et 'vitesse' sur l'autre liste avec un range sur ces 2 listes
+
+
+Attaquant centrale resoudre pb positionnement vers aucun point ciblé quand allié proche
+Attaquant centrale debut d'implementation engagement a continué (et à rajouter solo)
+implémenter : Move(Shoot(s))
+Des listes d'actions pour la génétique
+je suis un ifnirmatiain he fais de l'evolutid toit ca touc ca
