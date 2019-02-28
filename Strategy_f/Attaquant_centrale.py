@@ -24,13 +24,17 @@ class StrategyAttaquant_duo(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Attaquant Central")
         self.counter_engage = 0
+        self.counterstep = 0
         
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
+        dir_balle = s.ball - s.player
+        pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter_engage = 0
             
-        if(self.counter_engage == 0 and self.counterstep<1):
+        self.counterstep += 1
+        if(self.counter_engage == 0 and self.counterstep<2):
             return SoccerAction(Vector2D(0,0), Vector2D(0,0))
             
         if(self.counter_engage == 0):
@@ -41,12 +45,22 @@ class StrategyAttaquant_duo(Strategy):
         
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         
-        if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
-            return SoccerAction(s.player - Vector2D(joueur_proche.position.x + (10 * s.det_team(id_team)), joueur_proche.position.y))
-        
+        if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)): #se mettre entre la balle et le but ennemie
+            return SoccerAction(Vector2D(0, 0), Vector2D(0,0))
+            """
+            if(dir_balle.norm < CAN_SHOOT):
+                self.counterstep = 0
+                self.counter2 +=1
+                return SoccerAction(dir_balle, (s.joueur_proche_a(id_team, id_player).position-s.player).normalize().scale(3.8))
+            if(s.distance_balle(s.player, 10)):
+                return SoccerAction(dir_balle, Vector2D(0., 0.))
+                return SoccerAction(pos_cible, Vector2D(0,0))
+            """
+#        joueur_proche.position.y    s.player -
+#            joueur_proche.position.x + (10 * s.det_team(id_team))
         if(s.dir_ball.norm < CAN_SHOOT):
-            return SoccerAction(s.dir_ball_acc.normalize().scale(5), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
-        return SoccerAction(s.dir_ball_acc.normalize().scale(5), Vector2D(0,0))
+            return SoccerAction(s.dir_ball.normalize().scale(5), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+        return SoccerAction(s.dir_ball.normalize().scale(5), Vector2D(0,0))
         
         """
         if(joueur_proche == s.joueur_proche_ball_a and joueur_proche!=s.player):
