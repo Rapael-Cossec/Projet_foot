@@ -44,7 +44,6 @@ class StrategySolo(Strategy):
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter_engage = 0
-            
         
         
 #       if(self.counter_engage == 0 and self.counterstep<1):
@@ -66,7 +65,7 @@ class StrategySolo(Strategy):
             return SoccerAction(dir_balle, Vector2D(0, 0))
         
         
-        if(self.counterstep >= 500):
+        if(self.counterstep >= 1900):
             if(dir_balle.norm < CAN_SHOOT):
                 return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(5.0))
             return SoccerAction(dir_balle, Vector2D(0, 0))

@@ -28,7 +28,7 @@ class StrategyAttaquant(Strategy):
         # id_team is 1 or 2
         # id_player starts at 0
         if(s.dir_ball.norm < CAN_SHOOT):
-            return SoccerAction(s.dir_ball_acc.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+            return SoccerAction(s.dir_ball_acc.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
         
         return SoccerAction(s.dir_ball_acc.normalize().scale(5.0), Vector2D(0,0))
 """  

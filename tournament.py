@@ -14,11 +14,11 @@ Created on Mon Feb  4 16:51:52 2019
 #    if nb_players == 1:
 #        team.add("StrikeBack",StrategySolo())
 #    if nb_players == 2:
-#        team.add("Footix", RandomStrategy())
+#        team.add("Footix", RandomStr++ategy())
 #        team.add("Billy", StrategyDefenseur_duo())
 #    if nb_players == 3:
 #        team.add("Footix", StrategyAttaquant())----
-#        team.add("Footix", StrategyAttaquant())
+#        team.add( a"Footix", StrategyAttaquant())
 #        team.add("Billy", StrategyDefenseur_duo())
 #    return team
 
