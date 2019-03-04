@@ -25,27 +25,30 @@ import math
 class StrategySolo(Strategy):
     
     
-    def __init__(self):
+    def __init__(self, succ=None):
         Strategy.__init__(self, "Solo")
         self.counter = 0
         self.counterstep = 0
         self.counter_engage = 0
+        self.score1=0
+        self.score2=0
+        self.succ=succ
     def compute_strategy(self, state, id_team, id_player):
         if(state.step==0):
             self.counterstep = 0
             self.counter = 0    #retirer pour la contre attaque
-            
+
         self.counterstep += 1
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
         #        Distance_Shoot = (s.ball - s.player).norm 
-        pos_cible = ((s.ball - s.goal_a)*0.6 + (s.goal_a - s.player)).scale(5)
+        pos_cible = ((s.ball - s.goal_a)*self.succ + (s.goal_a - s.player)).scale(5)
         
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter_engage = 0
-        
-        
+            self.score1=s.state.score_team1
+            self.score2=s.state.score_team2
 #       if(self.counter_engage == 0 and self.counterstep<1):
 #            return SoccerAction(Vector2D(0,0), Vector2D(0,0))
 #        

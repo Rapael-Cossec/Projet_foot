@@ -55,7 +55,11 @@ class StrategyAttaquant_duo(Strategy):
     
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)): #se mettre sur l'axe x de l'attaquant adverse mais avec un y opposé
-            return SoccerAction(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x, 90-state.player_state(s.det_team_e(id_team),self.id_player_e1).position.y)-s.player, Vector2D(0,0)) #il ne va pas vers la bonne direction
+            if(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x<10)):
+                return SoccerAction(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x+10, 90-state.player_state(s.det_team_e(id_team),self.id_player_e1).position.y)-s.player, Vector2D(0,0)) #il ne va pas vers la bonne direction
+            if(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x>140)):
+                return SoccerAction(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x-10, 90-state.player_state(s.det_team_e(id_team),self.id_player_e1).position.y)-s.player, Vector2D(0,0)) #il ne va pas vers la bonne direction
+            return SoccerAction(Vector2D(state.player_state(s.det_team_e(id_team),self.id_player_e1).position.x-10, 90-state.player_state(s.det_team_e(id_team),self.id_player_e1).position.y)-s.player, Vector2D(0,0)) #il ne va pas vers la bonne direction
 
         if(s.dir_ball.norm < CAN_SHOOT):
             return SoccerAction(s.dir_ball.normalize().scale(5), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))

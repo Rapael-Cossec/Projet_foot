@@ -40,7 +40,8 @@ class StrategyDefenseur_duo(Strategy):
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter2 = 0
-
+            
+            
         if(s.player.distance(s.ball) < s.joueur_e(id_team, id_player).distance(s.ball) and self.counter > 1):
             if(self.counter2 == 0):
                 if(dir_balle.norm < CAN_SHOOT):
@@ -51,6 +52,10 @@ class StrategyDefenseur_duo(Strategy):
                     return SoccerAction(dir_balle, Vector2D(0., 0.))
                 return SoccerAction(pos_cible, Vector2D(0,0))
                 
+            joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
+            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
+                return SoccerAction(pos_cible, Vector2D(0,0))
+            
             if(dir_balle.norm < CAN_SHOOT):
                 self.counterstep = 0
                 return SoccerAction(dir_balle, (s.joueur_proche_a(id_team, id_player).position-s.player).normalize().scale(3.8))
@@ -75,11 +80,11 @@ class StrategyDefenseur_duo(Strategy):
         
 
         if(s.distance_balle(s.player, 10)):
-            return SoccerAction(dir_balle, Vector2D(0., 0.))
+           return SoccerAction(dir_balle, Vector2D(0., 0.))
         return SoccerAction(pos_cible, Vector2D(0,0))
     
     
-    
+
     
     
     

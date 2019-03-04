@@ -29,4 +29,6 @@ def get_team(nb_players):
         team.add("Footix", StrategyAttaquant())
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyAttaquant_duo())
+    if nb_players == 5:
+        team.add("DEFENDRE", StrategyDefenseur())            
     return team
