@@ -81,15 +81,20 @@ class SuperState(SoccerState):
             return 2
         return 1
     
-    
+
     @property
     def dir_ball_acc(self):
         """direction vers balle + acceleration de balle"""
+<<<<<<< HEAD
         return ((self.distance_avec_balle() * self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
+=======
+        a=self.dir_ball.norm * 42
+        return ((a*self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
+>>>>>>> e5e725178c35f36dc1a4153b9d009b321b13725e
     
     
     def joueur_proche(self, id_team, id_player):
-        opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_player != self.id_player]
+        opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if (id_player != self.id_player or id_team != self.id_team)]
         return min([(self.player.distance(player_p.position), player_p) for player_p in opponents])[1]
 
     def joueur_proche_a(self, id_team, id_player):
@@ -110,6 +115,15 @@ class SuperState(SoccerState):
     def joueur_solo_attaque(self, id_team):
         if(self.player.distance(Vector2D(self.player.x, self.joueur_e(self.det_team_e(id_team), 0).position.y)) < self.joueur_e(self.det_team_e(id_team), 0).distance(Vector2D(self.player.x, self.joueur_e(self.det_team_e(id_team), 0)).position.y)):
             return 1
+    
+    def test_joueur_e(self, id_team, id_player, joueur):
+        team_e = self.det_team_e(id_team)
+        for i in range(id_player):
+            if(joueur==self.state.player_state(team_e, i)):
+                return i
+    
+    
+    
     
     def passe(self, Vector):
         return Vector.normalize().scale(2.5)

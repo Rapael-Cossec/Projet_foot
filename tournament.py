@@ -14,11 +14,11 @@ Created on Mon Feb  4 16:51:52 2019
 #    if nb_players == 1:
 #        team.add("StrikeBack",StrategySolo())
 #    if nb_players == 2:
-#        team.add("Footix", RandomStrategy())
+#        team.add("Footix", RandomStr++ategy())
 #        team.add("Billy", StrategyDefenseur_duo())
 #    if nb_players == 3:
 #        team.add("Footix", StrategyAttaquant())----
-#        team.add("Footix", StrategyAttaquant())
+#        team.add( a"Footix", StrategyAttaquant())
 #        team.add("Billy", StrategyDefenseur_duo())
 #    return team
 
@@ -26,7 +26,12 @@ Created on Mon Feb  4 16:51:52 2019
 from soccersimulator import Simulation, show_simu
 from Strategy_f import get_team
 
+<<<<<<< HEAD
 team1 = get_team(2)
 team2 = get_team(2)
+=======
+team1 = get_team(3)
+team2 = get_team(5)
+>>>>>>> e5e725178c35f36dc1a4153b9d009b321b13725e
 simu = Simulation (team1,team2)
 show_simu(simu)

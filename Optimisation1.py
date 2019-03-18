@@ -9,10 +9,10 @@ from copy import copy
 from soccersimulator import Simulation, show_simu
 from Strategy_f.tools import GoTestStrategy
 from Strategy_f.GoalSearch import GoalSearch
+from Strategy_f.DefenseSearch import DefenseSearch
 from Strategy_f.SoloSearch import SoloSearch
 from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
 from random import *
-
 
 
 def frange(start, stop, step):
@@ -20,7 +20,8 @@ def frange(start, stop, step):
      while i < stop:
          yield i
          i += step
-         
+ 
+    
 def SelectionNaturelle(expe):
     expe.start()
     print(expe.get_best())
@@ -37,7 +38,18 @@ def SelectionNaturelle(expe):
     print(res)     
     return res
 
-def Reproduction(dico):
+def Reproduction1param(dico):
+    listevit=[] 
+    for i in dico:
+        if(random()<0.01):
+            listevit.append(i[0][1]*0.9+(random()*0.2))
+            cpt_mut=1
+        else: 
+            listevit.append(i[0][1])
+    print(listevit)
+    return listevit
+
+def Reproduction2param(dico):
     listevit=[]
     listestr=[]   
     listevit2=[]
@@ -64,7 +76,18 @@ def Reproduction(dico):
     listestr = listestr + listestr2
     return [listevit, listestr]
 
-print(0.9+(random()*0.2))
-expe = GoalSearch(strategy= StrategyAttaquant(),params={'strength':frange(3, 4, 0.1), 'vitesse':frange(3,4,1)})
+
+expe = DefenseSearch(strategy= StrategySolo(),params={'succ':frange(0.58, 0.68, 0.001)})
 test = SelectionNaturelle(expe)
-listerep = Reproduction(test)
+print(expe.get_best())
+listerep = Reproduction1param(test)
+i=0
+while i<10:
+    nextgen = Reproduction1param(test)
+    expe = DefenseSearch(strategy= StrategySolo(), params={'succ': nextgen})
+    test = SelectionNaturelle(expe)
+    listerep = Reproduction1param(test)
+    i+=1
+    print("\nfin generation", i, "\n")
+    print(expe.get_best())
+print(cpt_mut)
