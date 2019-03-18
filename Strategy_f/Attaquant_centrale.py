@@ -24,11 +24,13 @@ class StrategyAttaquant_duo(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Attaquant Central")
         self.counter_engage = 0
+        self.counterstep = 0
         
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter_engage = 0
+            self.counterstep += 1
             
         if(self.counter_engage == 0 and self.counterstep<1):
             return SoccerAction(Vector2D(0,0), Vector2D(0,0))
@@ -37,12 +39,13 @@ class StrategyAttaquant_duo(Strategy):
             if(s.dir_ball.norm < CAN_SHOOT):
                 self.counter_engage = 1
                 return SoccerAction(s.dir_ball_acc, s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
-            return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
+                return SoccerAction(s.dir_ball_acc, Vector2D(0,0))
         
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         
         if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
-            return SoccerAction(s.player - Vector2D(joueur_proche.position.x + (10 * s.det_team(id_team)), joueur_proche.position.y))
+            return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player, Vector2D(0, 0))
+#            return SoccerAction(s.player - Vector2D(joueur_proche.position.x + (10 * s.det_team(id_team)), joueur_proche.position.y))
         
         if(s.dir_ball.norm < CAN_SHOOT):
             return SoccerAction(s.dir_ball_acc.normalize().scale(5), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
