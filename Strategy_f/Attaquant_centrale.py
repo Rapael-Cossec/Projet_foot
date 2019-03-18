@@ -53,7 +53,6 @@ class StrategyAttaquant_duo(Strategy):
         
     
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
-        
         if(id_team == 1):     
             if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
                 return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player, Vector2D(0, 0))
