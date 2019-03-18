@@ -54,8 +54,13 @@ class StrategyAttaquant_duo(Strategy):
     
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         
-        if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
-            return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player, Vector2D(0, 0))
+        if(id_team == 1):     
+            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
+                return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player, Vector2D(0, 0))
+        else:
+            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
+                return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player + Vector2D(GAME_HEIGHT/2, 0), Vector2D(0, 0))
+            
 #            return SoccerAction(s.player - Vector2D(joueur_proche.position.x + (10 * s.det_team(id_team)), joueur_proche.position.y))
         
         if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)): #se mettre sur l'axe x de l'attaquant adverse mais avec un y opposé
