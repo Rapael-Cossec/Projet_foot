@@ -33,8 +33,8 @@ class StrategyAttaquant_trio_2(Strategy):
             self.counterstep += 1
 
         if(s.dir_ball.norm < CAN_SHOOT):
-            if(s.ball.y < (GAME_HEIGHT/2 + 30)):
-                return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT * 2 / 3)-s.player, state.player_state(id_team, 3).position.normalize().scale(3.2))
+            if(s.ball.y > (GAME_HEIGHT/2 + 30)):
+                return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT * 2 / 3)-s.player, (state.player_state(id_team, 3).position - s.player).normalize().scale(3.2))
             return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
         
         if(s.ball.y < (GAME_HEIGHT/2 + 10)):

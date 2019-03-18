@@ -41,8 +41,11 @@ class StrategyAttaquant_trio_1(Strategy):
         
         if(s.dir_ball.norm < CAN_SHOOT):
             if(s.ball.y <= (GAME_HEIGHT/2 - 30)):
-                return SoccerAction(s.dir_ball.normalize().scale(5.0), state.player_state(id_team, 3).position.normalize().scale(3.2))
-            return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), (state.player_state(id_team, 3).position - s.player).normalize().scale(3.2))
+            if((s.goal_e - s.player).norm < 20):
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+            if((s.joueur_proche(id_team, id_player).position - s.player).norm < 10):
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), (state.player_state(id_team, 3).position - s.player).normalize().scale(3.2))
         
         if(s.ball.y > (GAME_HEIGHT/2 - 10)):
             return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT / 4)-s.player, Vector2D(0, 0))

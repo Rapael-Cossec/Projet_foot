@@ -33,9 +33,9 @@ def get_team(nb_players):
         team.add("Footix", StrategyAttaquant())
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyAttaquant_duo())
-    if nb_players == 5:
+    if nb_players == 4:
         team.add("Je defend", StrategyDefenseur_duo())
-        team.add("DEFENDRE", StrategyAttaquant_trio_1())       
         team.add("DEFENDRE", StrategyAttaquant_trio_2())       
+        team.add("DEFENDRE", StrategyAttaquant_trio_1())       
         team.add("je suis ici", StrategyAttaquant_trio_3())
     return team
