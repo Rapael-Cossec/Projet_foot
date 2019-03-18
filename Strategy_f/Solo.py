@@ -42,7 +42,7 @@ class StrategySolo(Strategy):
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
         #        Distance_Shoot = (s.ball - s.player).norm 
-        pos_cible = ((s.ball - s.goal_a)*self.succ + (s.goal_a - s.player)).scale(5)
+        pos_cible = ((s.ball - s.goal_a)*0.6 + (s.goal_a - s.player)).scale(5)
         
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
