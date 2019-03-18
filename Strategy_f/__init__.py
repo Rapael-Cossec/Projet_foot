@@ -16,6 +16,7 @@ from .Defenseur_centrale import StrategyDefenseur_duo
 from .Attaquant_centrale import StrategyAttaquant_duo
 from .Attaquant_central_bas import StrategyAttaquant_trio_2
 from .Attaquant_central_haut import StrategyAttaquant_trio_1
+from .Attaquant_central_milieu import StrategyAttaquant_trio_3
 
 
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
@@ -35,5 +36,6 @@ def get_team(nb_players):
     if nb_players == 5:
         team.add("Je defend", StrategyDefenseur_duo())
         team.add("DEFENDRE", StrategyAttaquant_trio_1())       
-        team.add("DEFENDRE", StrategyAttaquant_trio_2())            
+        team.add("DEFENDRE", StrategyAttaquant_trio_2())       
+        team.add("je suis ici", StrategyAttaquant_trio_3())
     return team

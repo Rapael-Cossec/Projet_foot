@@ -34,17 +34,16 @@ class StrategyAttaquant_trio_1(Strategy):
             self.counter_engage = 0
             self.counterstep += 1
             
-        if(self.counter_engage == 0):
-            self.counter_engage =1
-            return SoccerAction(Vector2D(GAME_WIDTH/2, GAME_HEIGHT/4)-s.player, Vector2D(0,0))
-        if(s.ball.y<GAME_HEIGHT/2):
-            if(s.dir_ball.norm < CAN_SHOOT):
-                return SoccerAction(s.dir_ball.normalize().scale(5), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
-        return SoccerAction(s.dir_ball.normalize().scale(5), Vector2D(0,0))
-    
-        if(id_team == 1):     
-            if(state.player_state(id_team,0) == s.joueur_proche_ball_a(id_team, id_player)):
-                return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player, Vector2D(0, 0))
-        else:
-            if(state.player_state(id_team,0)  == s.joueur_proche_ball_a(id_team, id_player)):
-                return SoccerAction(Vector2D(GAME_HEIGHT/2, GAME_WIDTH/2) - s.player + Vector2D(GAME_HEIGHT/2, 0), Vector2D(0, 0))
+            
+#        if(self.counter_engage == 0):
+#            self.counter_engage =1
+#            return SoccerAction(Vector2D(GAME_WIDTH/2, GAME_HEIGHT/4)-s.player, Vector2D(0,0))
+        
+        if(s.dir_ball.norm < CAN_SHOOT):
+            if(s.ball.y <= (GAME_HEIGHT/2 - 30)):
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), state.player_state(id_team, 3).position.normalize().scale(3.2))
+            return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
+        
+        if(s.ball.y > (GAME_HEIGHT/2 - 10)):
+            return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT / 4)-s.player, Vector2D(0, 0))
+        return SoccerAction(dir_balle, Vector2D(0, 0))
