@@ -85,13 +85,7 @@ class SuperState(SoccerState):
     @property
     def dir_ball_acc(self):
         """direction vers balle + acceleration de balle"""
-<<<<<<< HEAD
-        return ((self.distance_avec_balle() * self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
-=======
-        a=self.dir_ball.norm * 42
-        return ((a*self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
->>>>>>> e5e725178c35f36dc1a4153b9d009b321b13725e
-    
+        return ((self.distance_avec_balle() * self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)    
     
     def joueur_proche(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if (id_player != self.id_player or id_team != self.id_team)]

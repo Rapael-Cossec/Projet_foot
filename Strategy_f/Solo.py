@@ -36,14 +36,9 @@ class StrategySolo(Strategy):
     def compute_strategy(self, state, id_team, id_player):
         if(state.step==0):
             self.counterstep = 0
-<<<<<<< HEAD
             self.counter = 0
 #        self.counter=0    #retirer pour la contre attaque
         
-=======
-            self.counter = 0    #retirer pour la contre attaque
-
->>>>>>> e5e725178c35f36dc1a4153b9d009b321b13725e
         self.counterstep += 1
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
@@ -63,19 +58,18 @@ class StrategySolo(Strategy):
 #                self.counter_engage = 1
 #                return SoccerAction(dir_balle, s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
 #            return SoccerAction(dir_balle, Vector2D(0,0))
-<<<<<<< HEAD
+
 #            
 #        if(dir_balle.norm < CAN_SHOOT):
 #            return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8) )
 #        return SoccerAction(dir_balle, Vector2D(0, 0))
 #        
-=======
             """
         if(dir_balle.norm < CAN_SHOOT):
             return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
         return SoccerAction(dir_balle, Vector2D(0, 0))
         """
->>>>>>> e5e725178c35f36dc1a4153b9d009b321b13725e
+
         if(self.counter == 1):
             if(dir_balle.norm < CAN_SHOOT):
                 return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
