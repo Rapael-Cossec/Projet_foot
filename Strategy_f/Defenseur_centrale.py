@@ -36,7 +36,11 @@ class StrategyDefenseur_duo(Strategy):
         dir_balle = s.ball - s.player
 #        Distance_Shoot = (s.ball - s.player).norm 
         pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
+        joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         
+        if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)):
+            self.counter2 = 0
+            
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter = 0
             self.counter2 = 0
