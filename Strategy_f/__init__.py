@@ -14,6 +14,9 @@ from .Solo import StrategySolo
 from .tools import SuperState, GoTestStrategy
 from .Defenseur_centrale import StrategyDefenseur_duo
 from .Attaquant_centrale import StrategyAttaquant_duo
+from .Attaquant_central_bas import StrategyAttaquant_trio_2
+from .Attaquant_central_haut import StrategyAttaquant_trio_1
+
 
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
 from soccersimulator import SoccerTeam
@@ -30,5 +33,7 @@ def get_team(nb_players):
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyAttaquant_duo())
     if nb_players == 5:
-        team.add("DEFENDRE", StrategyDefenseur())            
+        team.add("Je defend", StrategyDefenseur_duo())
+        team.add("DEFENDRE", StrategyAttaquant_trio_1())       
+        team.add("DEFENDRE", StrategyAttaquant_trio_2())            
     return team

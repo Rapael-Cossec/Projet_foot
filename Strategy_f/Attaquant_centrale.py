@@ -27,12 +27,21 @@ class StrategyAttaquant_duo(Strategy):
         self.counterstep = 0
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
-#        dir_balle = s.ball - s.player
+        dir_balle = s.ball - s.player
 #        pos_cible = ((s.ball - s.goal_a)*0.6 + (s.goal_a - s.player)).scale(5)
 #        mid_goal_e = ((s.ball - s.goal_e)*0.7 + (s.goal_e - s.player)).scale(5)
         if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
             self.counter_engage = 0
             self.counterstep += 1
+            
+        if(self.counter_engage == 0):
+            if(s.dir_ball.norm < CAN_SHOOT+1.784):
+                self.counter_engage = 1
+                return SoccerAction(dir_balle, s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+            return SoccerAction(dir_balle, Vector2D(0,0))          
+            
+            
+            
             """
         if(self.attaquant_e == 0):
             joueur_e = s.joueur_proche(id_team, id_player)

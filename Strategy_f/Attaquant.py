@@ -21,15 +21,21 @@ import math
 class StrategyAttaquant(Strategy):
     def __init__(self): 
         Strategy.__init__(self, "Attaquant")
+        self.engage=0
 #        self.strength = strength
 #        self.vitesse = vitesse
     def compute_strategy(self, state, id_team, id_player):
         s = SuperState(state, id_team, id_player)
+        if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):  
+            self.engage = 0
         # id_team is 1 or 2
         # id_player starts at 0
+        if(self.engage==0):
+            if(s.dir_ball.norm < CAN_SHOOT):
+                self.engage=1
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
         if(s.dir_ball.norm < CAN_SHOOT):
             return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5.0))
-        
         return SoccerAction(s.dir_ball.normalize().scale(5.0), Vector2D(0,0))
 """  
 # Create teams
