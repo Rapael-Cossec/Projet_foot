@@ -37,17 +37,32 @@ class StrategyAttaquant_trio_3(Strategy):
         if(self.counter_engage == 0):
             if(s.dir_ball.norm < CAN_SHOOT):
                 self.counter_engage = 1
-                return SoccerAction(dir_balle, state.player_state(id_team, 1).position.normalize().scale(3.2))
+                return SoccerAction(dir_balle, (Vector2D(GAME_WIDTH/2, GAME_HEIGHT/2) - s.player).normalize().scale(3.8))
             return SoccerAction(dir_balle, Vector2D(0,0))
 
 
         if(s.dir_ball.norm < CAN_SHOOT):
-            if(s.player.y > 135):
+            if(id_team == 1):
+                if((s.goal_e - s.player).norm < 50):#a tester
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+                if(s.ball.y >= (GAME_HEIGHT/2)):
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), (Vector2D(state.player_state(id_team, 3).position.x + 20,  state.player_state(id_team, 3).position.x) - s.player).normalize().scale(3.8)) #a tester
+#                    return SoccerAction(dir_balle, (state.player_state(id_team, 2).position - s.player).normalize().scale(3.2))
+                if(s.ball.y <= (GAME_HEIGHT/2)):
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), (Vector2D(state.player_state(id_team, 3).position.x + 20,  state.player_state(id_team, 3).position.x) - s.player).normalize().scale(3.2)) #a tester
+#                    return SoccerAction(dir_balle, (state.player_state(id_team, 1).position - s.player).normalize().scale(3.2))
                 return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
-            if(s.ball.y < GAME_HEIGHT/2):
-                return SoccerAction(dir_balle, (state.player_state(id_team, 2).position - s.player).normalize().scale(3.2))
-            return SoccerAction(dir_balle, state.player_state(id_team, 1).position.normalize().scale(3.2))
-        
+            else:
+                if((s.goal_e - s.player).norm < 50):#a tester
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+                if(s.ball.y >= (GAME_HEIGHT/2)):
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), (Vector2D(state.player_state(id_team, 3).position.x - 20,  state.player_state(id_team, 3).position.x) - s.player).normalize().scale(3.8)) #a tester
+#                    return SoccerAction(dir_balle, (state.player_state(id_team, 2).position - s.player).normalize().scale(3.2))
+                if(s.ball.y <= (GAME_HEIGHT/2)):
+                    return SoccerAction(s.dir_ball.normalize().scale(5.0), (Vector2D(state.player_state(id_team, 3).position.x - 20,  state.player_state(id_team, 3).position.x) - s.player).normalize().scale(3.2)) #a tester
+#                    return SoccerAction(dir_balle, (state.player_state(id_team, 1).position - s.player).normalize().scale(3.2))
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+
         if(s.ball.y > (GAME_HEIGHT/2 + 10) or s.ball.y < (GAME_HEIGHT/2 - 10)):
             return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT / 2)-s.player, Vector2D(0, 0))
         return SoccerAction(s.dir_ball.normalize().scale(5.0), Vector2D(0, 0))
