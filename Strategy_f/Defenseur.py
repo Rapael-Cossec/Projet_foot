@@ -18,7 +18,7 @@ pb joeueur proche et tout ca tout ca """
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
 from soccersimulator import Strategy
-from Strategy_f.tools import SuperState
+from .tools import SuperState
 from soccersimulator import settings
 import math
 
@@ -30,7 +30,7 @@ class StrategyDefenseur(Strategy):
         s = SuperState(state, id_team, id_player)
         dir_balle = s.ball - s.player
 #        Distance_Shoot = (s.ball - s.player).norm 
-        pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
+        pos_cible = ((s.ball - s.goal_a)*0.6 + (s.goal_a - s.player)).scale(5)
         if(s.distance_balle(s.player, CAN_SHOOT)):
             if(s.state.nb_players(id_team) > 1):
                 a=s.dir_ball.norm*self.test
