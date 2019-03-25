@@ -1,34 +1,47 @@
+from soccersimulator import SoccerTeam, Strategy, Simulation
+from soccersimulator import Vector2D, show_simu
+from sklearn.model_selection import ParameterGrid
+from soccersimulator.settings  import GAME_WIDTH, GAME_HEIGHT
+from .Random import RandomStrategy
+from .Defenseur import StrategyDefenseur
+from .Attaquant import StrategyAttaquant
+from .Fonceur import StrategyFonceur
+from .Solo import StrategySolo
+from .tools import SuperState, GoTestStrategy
+from .Defenseur_centrale import StrategyDefenseur_duo
+from .Attaquant_centrale import StrategyAttaquant_duo
+
 def  begin_match(self , team1 , team2 , state):
     self.last_step = 0
     # Step of the  last  round
-self.qtable = dict()
-# Q table
+    self.qtable = dict()
+    # Q table
 def  begin_round(self , team1 , team2 , state):
     ball = Vector2D.create_random(low=0, high =1)
     ball.x *=  GAME_WIDTH
     ball.y *=  GAME_HEIGHT
     # Player  and  ball  postion (random)
-self.simu.state.states [(1, 0)]. position = ball.copy()
-# Player  position
-self.simu.state.states [(1, 0)]. vitesse = Vector2D ()
-# Player  acceleration
-self.simu.state.ball.position = ball.copy()
-# Ball  position
-# Last  step of the  game
-self.last_step = self.simu.step
-self.last_state = None
-self.last_score = self.simu.score [1]
-# Score  of Team 1
-self.cur_state = self.strategy.get_state(state , id_team=1,  id_player =0)
-self.rewards = []
+    self.simu.state.states [(1, 0)]. position = ball.copy()
+    # Player  position
+    self.simu.state.states [(1, 0)]. vitesse = Vector2D ()
+    # Player  acceleration
+    self.simu.state.ball.position = ball.copy()
+    # Ball  position
+    # Last  step of the  game
+    self.last_step = self.simu.step
+    self.last_state = None
+    self.last_score = self.simu.score [1]
+    # Score  of Team 1
+    self.cur_state = self.strategy.get_state(state , id_team=1,  id_player =0)
+    self.rewards = []
 
 def  update_round(self , team1 , team2 , state):
     # Q-learning  update
-self.qupdate(state)
-if  state.step > self.last_step + self.max_round_step:
+    self.qupdate(state)
+    if  state.step > self.last_step + self.max_round_step:
     # Change  action  when  state  doesn’t change
-if self.cur_state  == self.last_state:
-    self.strategy.strategy = self.next_action(self.cur_state)
+        if self.cur_state  == self.last_state:
+            self.strategy.strategy = self.next_action(self.cur_state)
     self.last_state = self.cur_state
 
 def  qupdate(self , state):
