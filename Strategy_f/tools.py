@@ -85,7 +85,6 @@ class SuperState(SoccerState):
     @property
     def dir_ball_acc(self):
         """direction vers balle + acceleration de balle"""
-
 #        return ((self.distance_avec_balle() * self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)
         a=self.dir_ball.norm * 42
         return ((a*self.state.ball.vitesse + self.state.ball.position) - self.state.player_state(self.id_team, self.id_player).position).normalize().scale(5)

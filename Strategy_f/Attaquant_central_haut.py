@@ -57,5 +57,7 @@ class StrategyAttaquant_trio_1(Strategy):
                 
         
         if(s.ball.y > (GAME_HEIGHT/2 - 10)):
+            if((s.goal_e - s.player).norm < 20):
+                return SoccerAction(Vector2D(130, GAME_HEIGHT / 4)-s.player, Vector2D(0, 0))
             return SoccerAction(Vector2D(s.ball.x, GAME_HEIGHT / 4)-s.player, Vector2D(0, 0))
         return SoccerAction(dir_balle, Vector2D(0, 0))

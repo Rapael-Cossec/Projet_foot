@@ -16,7 +16,8 @@ from .Defenseur_centrale import StrategyDefenseur_duo
 from .Attaquant_centrale import StrategyAttaquant_duo
 from .Attaquant_central_bas import StrategyAttaquant_trio_2
 from .Attaquant_central_haut import StrategyAttaquant_trio_1
-from .Attaquant_central_milieu import StrategyAttaquant_trio_3
+from Attaquant_central_milieu import StrategyAttaquant_trio_3
+from .Defenseur_central_trio import StrategyDefenseur_trio
 
 
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
@@ -34,8 +35,13 @@ def get_team(nb_players):
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyAttaquant_duo())
     if nb_players == 4:
-        team.add("Je defend", StrategyDefenseur_duo())
+        team.add("Je defend", StrategyDefenseur_trio())
         team.add("DEFENDRE", StrategyAttaquant_trio_2())       
         team.add("DEFENDRE", StrategyAttaquant_trio_1())       
         team.add("je suis ici", StrategyAttaquant_trio_3())
+    if nb_players == 5:
+        team.add("Je defend", StrategyDefenseur_trio())
+        team.add("static1", RandomStrategy())
+        team.add("static2", RandomStrategy())
+        team.add("static3", RandomStrategy())
     return team
