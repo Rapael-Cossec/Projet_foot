@@ -13,7 +13,7 @@ from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
 from soccersimulator import Strategy
 from soccersimulator import settings
-from Strategy_f.tools import SuperState
+from .tools import SuperState
 import math
 
 GAME_WIDTH = 150

@@ -26,7 +26,7 @@ from soccersimulator import SoccerTeam
 def get_team(nb_players):  
     team = SoccerTeam(name="Unknown")
     if nb_players == 1:
-        team.add("StrikeBack",StrategySolo())
+        team.add("StrikeBack",StrategyDefenseur())
     if nb_players == 2:
         team.add("J'attaque", StrategyAttaquant_duo())
         team.add("Je defend", StrategyDefenseur_duo())

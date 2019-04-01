@@ -16,7 +16,7 @@ CAN_SHOOT = PLAYER_RADIUS + BALL_RADIUS
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
 from soccersimulator import Strategy
-from Strategy_f.tools import SuperState
+from .tools import SuperState
 from soccersimulator import settings
 import math
 
@@ -51,7 +51,7 @@ class StrategySolo(Strategy):
                 return SoccerAction(dir_balle, (s.goal_e - s.player).normalize().scale(3.8))
             return SoccerAction(dir_balle, Vector2D(0, 0))
         
-        if(s.ball.x == GAME_WIDTH/2 and s.ball.y == GAME_HEIGHT/2):
+        if(s.ball_vitesse.norm==0):
             self.counter = 0
             self.counter_engage = 0
             self.score1=s.state.score_team1
