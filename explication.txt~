@@ -1,0 +1,3 @@
+--volleyball_question1.py
+
+Chaque equipe ce place en attente tant que le ballon n'est pas dans leur partie du terrain et quand il est dans leur partie il vont vers la balle pour faire la passe a l'ennemie le plus proche puis ce replace

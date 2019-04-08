@@ -26,7 +26,7 @@ Created on Mon Feb  4 16:51:52 2019
 from soccersimulator import Simulation, show_simu
 from Strategy_f import get_team
 
-team1 = get_team(4)
-team2 = get_team(4)
+team1 = get_team(7)
+team2 = get_team(7)
 simu = Simulation (team1,team2)
 show_simu(simu)

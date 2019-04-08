@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 28 16:09:02 2019
+Created on Mon Apr  8 16:11:19 2019
 
 @author: 3700049
 """
+
 GAME_WIDTH = 150
 GAME_HEIGHT = 90
 
@@ -102,6 +103,15 @@ class SuperState(SoccerState):
 
     def joueur_proche_a(self, id_team, id_player):
         opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_team == self.id_team and id_player != self.id_player]
+        return min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]
+        try:
+            a=min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]
+        except TypeError:
+            a=self.state.player_state(self.det_team_e(id_team),0)
+        return a
+    
+    def joueur_proche_e(self, id_team, id_player):
+        opponents = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players if id_team != self.id_team ]
         return min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]
         try:
             a=min([(self.player.distance(player_a.position), player_a) for player_a in opponents])[1]

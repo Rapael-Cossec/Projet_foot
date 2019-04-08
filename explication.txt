@@ -1,0 +1,10 @@
+--volleyball_question1.py
+
+Chaque equipe ce place en attente tant que le ballon n'est pas dans leur partie du terrain et quand il est dans leur partie il vont vers la balle pour faire la passe a l'ennemie le plus proche puis ce replace
+
+
+--voleyball_question2.py
+
+Le joueur regard si l'ennemie est dans la partie superieur ou inferieur du terrain, si l'ennemie est dans la partie superieur il va envoyer la balle au fond en bas et inversement.
+Il va aussi reperer si il est loin du milieu il va se faire une passe pour faire un meilleur tir.
+Il va se placer par default au milieu de son terrain.
