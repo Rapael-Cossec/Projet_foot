@@ -8,3 +8,24 @@ Chaque equipe ce place en attente tant que le ballon n'est pas dans leur partie 
 Le joueur regard si l'ennemie est dans la partie superieur ou inferieur du terrain, si l'ennemie est dans la partie superieur il va envoyer la balle au fond en bas et inversement.
 Il va aussi reperer si il est loin du milieu il va se faire une passe pour faire un meilleur tir.
 Il va se placer par default au milieu de son terrain.
+
+--voleyball_question3.py
+
+Le joueur defenseur va attendre la balle en se positionnant au y opposé a son alliès en attendant que la balle soit dans son terrain.
+Quand la balle entre dans le terrain il va viser le balle pour faire la passe a son alliès qui va pouvoir attaquer
+
+--voleyball_question4.py
+
+Le joueur solo quand la balle est dans la partie advers il va se placer a 1/4 du terrain(ou 3/4 selon le coté) et il va faire varier son y en fonction de la balle la suivant.
+Quand la balle rentre dans son terrain si il est loin du milieu il va se rapprocher avec un passe.
+Si il est suffisament proche il va tirer a la limite du terrain de l'adversaire.
+
+--voleyball_question5.py
+
+Quand la balle est dans le terrain adverse:
+      l'attaquant va attendre tres proche du filet en suivant le y de la balle
+      le defenseur va se mettre en retrait en suivant aussi le y de la balle
+
+Quand la balle est dans son terrain
+      l'attaquant va essayer de frapper la balle mais si le defenseur est plus proche ou que la balle est trop loin derriere il va se remettre en attente au filet pour que son allies lui fasse la passe et qu'il tire
+      Le defenseur va lui attendre en suivant le y et si il est le plus proche il va aller sur la balle pour faire la passe a son allies.

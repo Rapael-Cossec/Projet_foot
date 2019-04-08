@@ -20,7 +20,10 @@ from .Attaquant_central_milieu import StrategyAttaquant_trio_3
 from .Defenseur_central_trio import StrategyDefenseur_trio
 from .Echauffement_1 import StrategyPasse
 from .StrategyAttaquant_Volley import StrategyAttaque_v
-
+from .Defenseur_v import StrategyDefenseur_v
+from .Solo_v import StrategySolo_v
+from .Defenseur2_v import StrategyDefenseur2_v
+from .Attaquant_2_v import StrategyAttaque2_v
 #from Strategy_f import SuperState, StrategySolo, StrategyAttaquant, StrategyDefenseur, StrategyDefenseur_duo, RandomStrategy
 from soccersimulator import SoccerTeam
 
@@ -45,4 +48,13 @@ def get_team(nb_players):
         team.add("PASSE", StrategyPasse())
     if nb_players == 8:
         team.add("ATTAQUE", StrategyAttaque_v())
+    if nb_players == 9:
+        team.add("je defend", StrategyDefenseur_v())
+        team.add("j'attaque", StrategyAttaque_v())
+    if nb_players == 10:
+        team.add("je solo", StrategySolo_v())
+    if nb_players == 11:
+        team.add("je defend", StrategyDefenseur2_v())
+        team.add("j'attaque", StrategyAttaque2_v())
+        
     return team 
