@@ -30,10 +30,10 @@ class StrategyAttaque2_v(Strategy):
         
         joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
         if(id_team == 1):
-            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player) or s.ball.x < 40):
+            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player) or s.ball.x < 60):
                 return SoccerAction(Vector2D(GAME_WIDTH*7/16, s.ball.y) - s.player, Vector2D(0, 0))
         else:
-            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)or s.ball.x > GAME_WIDTH - 40):
+            if(joueur_proche == s.joueur_proche_ball_a(id_team, id_player)or s.ball.x > GAME_WIDTH - 60):
                 return SoccerAction(Vector2D(GAME_WIDTH*9/16, s.ball.y) - s.player, Vector2D(0, 0))
         if(id_team == 1):
             if(s.ball.x <= GAME_WIDTH/2):
