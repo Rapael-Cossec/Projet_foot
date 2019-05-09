@@ -26,7 +26,7 @@ from soccersimulator import SoccerTeam
 def get_team(nb_players):  
     team = SoccerTeam(name="Unknown")
     if nb_players == 1:
-        team.add("StrikeBack",StrategyDefenseur())
+        team.add("StrikeBack",StrategySolo())
     if nb_players == 2:
         team.add("J'attaque", StrategyAttaquant_duo())
         team.add("Je defend", StrategyDefenseur_duo())
@@ -35,13 +35,19 @@ def get_team(nb_players):
 #        team.add("Footix", RandomStrategy())
 #        team.add("Billy", StrategyAttaquant_duo())
     if nb_players == 4:
-        team.add("Je defend", StrategyDefenseur_trio())
+        team.add("Je defend", StrategyDefenseur_duo())
         team.add("DEFENDRE", StrategyAttaquant_trio_2())       
         team.add("DEFENDRE", StrategyAttaquant_trio_1())       
         team.add("je suis ici", StrategyAttaquant_trio_3())
     if nb_players == 5:
-        team.add("Je defend", StrategyDefenseur_trio())
+        team.add("Je defend", StrategyDefenseur_duo())
         team.add("static1", RandomStrategy())
         team.add("static2", RandomStrategy())
         team.add("static3", RandomStrategy())
+    if nb_players == 6:
+        team.add("static2", RandomStrategy())
+        team.add("static3", RandomStrategy())
+        
+        
+        
     return team

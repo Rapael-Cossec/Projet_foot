@@ -139,13 +139,61 @@ class SuperState(SoccerState):
     
     
     
-    
     def passe(self, Vector):
         return Vector.normalize().scale(2.5)
     
     def shoot(self, Vector):
         return Vector.normalize().scale(3.8)
     
+    def element_entre(debut, fin, obst):
+        vdebut_fin = debut - fin
+        vdebut_fin = obs - src
+        return ((abs(vdebut_fin.angle-vdebut_fin.angle) < 0.2) and (debut.distance(obst) < debut.distance(fin)))
+
+    def joueurs_entre(self, debut, fin):
+        joueurs = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players]
+        for i in joueurs:
+            obst = i
+            
+            if element_entre(debut, fin, obst):
+                return obst
+        return False
+    
+    
+    def proche_balle(self):
+        joueurs = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players]
+        for i in joueurs:
+            if(i.position.distance(self.state.ball.position) < BALL_RADIUS + PLAYER_RADIUS):
+                if i.id_team != self.id_team:
+                    return 0 #ennemie le plus proche qui va frapper 
+        
+        if self.player.distance(self.ball) < BALL_RADIUS + PLAYER_RADIUS:
+            return 1#moi qui vait frapper
+        
+        
+        for i in joueurs:
+            if(i.position.distance(self.state.ball.position) < BALL_RADIUS + PLAYER_RADIUS):
+                if i.id_team == self.id_team:
+                    return 2 #allie qui va frapper
+                
+        else:
+            return 3 #personnne qui va frapper
+        
+    def shoot_safe(self):
+        for i in range(0, GAME_HEIGHT/2):
+            cible=Vector2D(GAME_WIDTH/2, i)
+            if self.joueurs_entre(self.ball.position, cible) == False:
+                return cible
+        return Vector2D(self.ball.position.x + 20, GAME_HEIGHT)
+        
+    def ennemiebut(self):
+        joueurs = [self.state.player_state(id_team, id_player) for (id_team, id_player) in self.state.players]
+        res = joueur[0]
+        for i in joueurs:
+            d = i.distance(self.ball())
+            if d < res.distance(self.ball()):
+                res = d
+        return res
     
 def frange(start, stop, step):
      i = start

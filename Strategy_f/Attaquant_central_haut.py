@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -55,7 +56,6 @@ class StrategyAttaquant_trio_1(Strategy):
                     return SoccerAction(s.dir_ball.normalize().scale(5.0), (state.player_state(id_team, 3).position - s.player).normalize().scale(3.8))
                 return SoccerAction(s.dir_ball.normalize().scale(5.0), (Vector2D(state.player_state(id_team, 3).position.x - 20,  state.player_state(id_team, 3).position.x) - s.player).normalize().scale(3.8)) #a tester
                 
-        
         if(s.ball.y > (GAME_HEIGHT/2 - 10)):
             if((s.goal_e - s.player).norm < 20):
                 return SoccerAction(Vector2D(130, GAME_HEIGHT / 4)-s.player, Vector2D(0, 0))

@@ -33,7 +33,35 @@ class StrategyDefenseur_trio(Strategy):
         
         s = SuperState(state, id_team, id_player)
         
+        pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
         dir_balle = s.ball - s.player
+        if (id_team == 1):
+            if(s.ball.x >= GAME_WIDTH/2):
+                return SoccerAction(Vector2D(GAME_HEIGHT/8, ((pos_cible.y - GAME_HEIGHT/2) / 5) + GAME_HEIGHT/2) - s.player , Vector2D(0, 0))
+            action = s.proche_balle()
+            if(action == 0 or action == 3):
+                return SoccerAction(dir_balle, Vector2D(0, 0))
+            if(action == 1):
+                return SoccerAction(dir_balle, s.shoot_safe())
+            if(action == 2):
+                return SoccerAction(s.shoot_safe(), Vector2D(0, 0))
+            
+        else:
+            if(s.ball.x <= GAME_WIDTH/2):
+                return SoccerAction(Vector2D(GAME_WIDTH*7/8, ((pos_cible.y - GAME_HEIGHT/2) / 5) + GAME_HEIGHT/2) - s.player , Vector2D(0, 0))
+            action = s.proche_balle()
+            if(action == 0 or action == 3):
+                return SoccerAction(dir_balle, Vector2D(0, 0))
+            if(action == 1):
+                return SoccerAction(dir_balle, s.shoot_safe())
+            if(action == 2):
+                return SoccerAction(s.shoot_safe(), Vector2D(0, 0))
+            
+            
+        return SoccerAction(Vector2D(0, 0), Vector2D(0, 0))
+        
+                
+"""
         if((s.ball.x + s.ball_vitesse.x) < 0):
 #        Distance_Shoot = (s.ball - s.player).norm 
             pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
@@ -57,7 +85,9 @@ class StrategyDefenseur_trio(Strategy):
             if(s.distance_balle(s.player, 10)):
                 return SoccerAction(dir_balle, Vector2D(0., 0.))
             return SoccerAction(pos_cible, Vector2D(0,0))
-        else:    
+        #defenseur qui attend l'adversaire avant de tirer
+        
+        else:
             pos_cible = ((s.ball - s.goal_a)/2 + (s.goal_a - s.player)).scale(5)
             joueur_proche = s.joueur_proche_ball_all(id_team, id_player)
             if(s.player.distance(s.ball) < s.joueur_e(id_team, id_player).distance(s.ball)):
@@ -78,6 +108,4 @@ class StrategyDefenseur_trio(Strategy):
                 return SoccerAction(dir_balle, Vector2D(0, 0))
             if(s.distance_balle(s.player, 10)):
                 return SoccerAction(dir_balle, Vector2D(0., 0.))
-            return SoccerAction(pos_cible, Vector2D(0,0))
-    
-    
+            return SoccerAction(pos_cible, Vector2D(0,0))"""

@@ -33,9 +33,9 @@ class StrategyAttaquant(Strategy):
         if(self.engage==0):
             if(s.dir_ball.norm < CAN_SHOOT+1.784):
                 self.engage=1
-                return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+                return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5))
         if(s.dir_ball.norm < CAN_SHOOT):
-            return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(3.8))
+            return SoccerAction(s.dir_ball.normalize().scale(5.0), s.shoot((s.goal_e - s.player)).normalize().scale(5))
         return SoccerAction(s.dir_ball.normalize().scale(5.0), Vector2D(0,0))
 """  
 # Create teams
